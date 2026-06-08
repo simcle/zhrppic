@@ -3,6 +3,7 @@ import StockOpnameModel from '../models/stockopname.js'
 import InventoryModel from '../models/inventory.js'
 import ErrorResponse from '../utils/errorHandler.js'
 import { insertStockCard } from './stockCardService.js'
+
 export const getStockOpnameDraft = async (payload) => {
     const userId = new mongoose.Types.ObjectId(payload)
     try {

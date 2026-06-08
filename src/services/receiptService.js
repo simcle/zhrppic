@@ -133,13 +133,13 @@ export const confirmReceipt = async (payload) => {
         for (let i = 0; i < items.length; i++) {
             const item = items[i]
             const lastQty = await InventoryModel.findById(item.productId).select('quantity')
-            const newQty = parseInt(lastQty.quantity) + parseInt(item.qty)
-            await InventoryModel.updateOne({_id: item.productId}, {quantity: newQty})
+            const newQty = parseFloat(lastQty.quantity) + parseFloat(item.qty)
+            await InventoryModel.updateOne({_id: item.productId}, {quantity: Math.round(newQty * 100) / 100})
 
             stockcard.type = 'in'
             stockcard.productId = item.productId
             stockcard.qty = item.qty
-            stockcard.balance = newQty
+            stockcard.balance = Math.round(newQty * 100) / 100
             await insertStockCard(stockcard)
         }
         return 'OK'

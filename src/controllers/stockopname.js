@@ -22,12 +22,13 @@ export const stockopnameGetDraft = async (req, res, next) => {
 }
 
 export const stockopnameInsertDraft = async (req, res, next) => {
+    const diff = parseFloat(req.body.qty) - parseFloat(req.body.onHand)
     const payload = {
         userId: req.user.userId,
         productId: req.body._id,
-        stock: req.body.onHand,
-        counted: parseInt(req.body.qty),
-        difference: parseInt(req.body.qty) - parseInt(req.body.onHand)
+        stock: parseFloat(req.body.onHand),
+        counted: parseFloat(req.body.qty),
+        difference: Math.round(diff * 100) / 100
     }
 
     try {
