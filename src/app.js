@@ -17,6 +17,7 @@ app.use(corsMiddleware)
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 
+app.use('/api/inventory', inventoryRoutes)
 app.use('/auth', userRouter)
 app.use('/category', authenticate, categoryRouter)
 app.use('/unit', authenticate, unitRouter)

@@ -63,7 +63,7 @@ export const updateInventory = async (payload) => {
 export const readInventories = async (payload) => {
     const search = payload.search
     const currentPage = payload.page || 1
-    const perPage = payload.perPage || 10
+    const perPage = Number(payload.perPage) || 10
     const queryString = '\"' + search.split(' ').join('\" \"') + '\"';
     let totalItems;
     let query;
